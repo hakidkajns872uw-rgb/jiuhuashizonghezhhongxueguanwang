@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>九华市综合中学 - 2015版</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", sans-serif;
+}
+body {
+    background: #f9f9f9;
+    color: #333;
+    line-height: 1.8;
+}
+.search-bar {
+    background: #c0392b;
+    padding: 12px 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.search-bar input {
+    width: 280px;
+    padding: 8px 12px;
+    border: none;
+    background: #fff;
+    color: #333;
+    border-radius: 4px;
+    outline: none;
+}
+.search-bar button {
+    padding: 8px 14px;
+    margin-left: 6px;
+    background: #a82719;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-bar button:hover {
+    background: #8c1f13;
+}
+.container { 
+    max-width: 1000px; 
+    margin: 0 auto; 
+    padding: 20px; 
+}
+header { 
+    text-align: center; 
+    padding: 30px 20px; 
+    margin-bottom: 25px; 
+}
+header h1 { 
+    font-size: 26px; 
+    color: #c0392b; 
+    margin-bottom: 8px; 
+}
+header p { 
+    color: #666; 
+    font-size: 15px; 
+}
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+.card h2 {
+    font-size: 20px; 
+    color: #c0392b; 
+    margin-bottom: 18px;
+    padding-bottom: 10px; 
+    border-bottom: 1px solid #eee;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+.card h2::before { content: "•"; color: #c0392b; }
+.text { margin-bottom: 16px; color: #333; font-size: 15px; }
+.text-indent { text-indent: 2em; }
+.teacher-box { 
+    margin-bottom: 22px; 
+    padding-bottom: 20px; 
+    border-bottom: 1px solid #eee; 
+}
+.teacher-box:last-child { 
+    border-bottom: none; 
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
+.teacher-name { 
+    font-size: 17px; 
+    color: #c0392b; 
+    font-weight: bold;
+    margin-bottom: 6px; 
+}
+.teacher-title { 
+    color: #666; 
+    font-size: 14px; 
+    margin-bottom: 10px; 
+}
+.teacher-desc { 
+    color: #333; 
+    font-size: 15px; 
+    margin-bottom: 8px; 
+}
+.teacher-motto { 
+    color: #c0392b; 
+    font-style: italic; 
+    font-size: 14px; 
+}
+.note { 
+    color: #c0392b; 
+    font-size: 14px; 
+    margin-top: 8px; 
+}
+.honor-list, .graduate-list { 
+    margin: 12px 0; 
+    padding-left: 20px; 
+}
+.honor-list li, .graduate-list li { 
+    margin-bottom: 6px; 
+    color: #333; 
+    font-size: 15px; 
+}
+.article {
+    background: #f5f5f5; 
+    padding: 20px; 
+    border-radius: 8px; 
+    margin: 16px 0;
+}
+.article .title { 
+    color: #c0392b; 
+    font-size: 17px; 
+    margin-bottom: 8px; 
+    font-weight: bold;
+}
+.article .info { 
+    color: #666; 
+    font-size: 14px; 
+    margin-bottom: 15px; 
+}
+.article .content { 
+    color: #333; 
+    font-size: 15px; 
+    line-height: 1.9; 
+}
+.article .content p { 
+    margin-bottom: 12px; 
+    text-indent: 2em; 
+}
+.notice-item { 
+    margin-bottom: 24px; 
+    padding-bottom: 20px; 
+    border-bottom: 1px dashed #eee; 
+}
+.notice-item:last-child { 
+    border-bottom: none; 
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
+.notice-title { 
+    color: #c0392b; 
+    font-size: 16px; 
+    font-weight: bold;
+    margin-bottom: 6px; 
+}
+.notice-info { 
+    color: #666; 
+    font-size: 13px; 
+    margin-bottom: 12px; 
+}
+.notice-content { 
+    color: #333; 
+    font-size: 15px; 
+    line-height: 1.9; 
+}
+.notice-content p { 
+    margin-bottom: 10px; 
+}
+footer {
+    text-align: center; 
+    padding: 25px 20px; 
+    margin-top: 30px;
+    background: #333; 
+    color: #fff; 
+    font-size: 14px;
+}
+
+#main2015, #main2020, #studentLogin, #teacherLogin, #emailSystem, #error373, #guSinglePage, #videoPage {
+    display: none;
+}
+#main2015 { display: block; }
+
+.login-page { 
+    height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    padding: 20px; 
+    background: #f9f9f9;
+}
+.login-box {
+    background: #fff; 
+    padding: 30px; 
+    border-radius: 8px;
+    width: 100%; 
+    max-width: 360px; 
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+}
+.login-box h3 { 
+    color: #c0392b; 
+    margin-bottom: 20px; 
+    text-align: center; 
+}
+.login-box select, .login-box input {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 12px;
+    background: #f5f5f5; 
+    color: #333; 
+    border: 1px solid #eee; 
+    border-radius: 4px; 
+    outline: none;
+}
+.login-box button {
+    width: 100%; 
+    padding: 10px; 
+    background: #c0392b; 
+    color: #fff;
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    margin-top: 6px;
+}
+
+.email-system { 
+    max-width: 900px; 
+    margin: 30px auto; 
+    padding: 20px; 
+}
+.email-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px; 
+}
+.email-header h2 { 
+    color: #c0392b; 
+}
+.email-item {
+    background: #fff; 
+    padding: 20px; 
+    border-radius: 8px;
+    margin-bottom: 16px; 
+    border-left: 4px solid #c0392b;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.email-from { 
+    color: #666; 
+    font-size: 14px; 
+    margin-bottom: 6px; 
+}
+.email-title { 
+    color: #333; 
+    font-weight: bold;
+    margin-bottom: 10px; 
+}
+.email-content { 
+    color: #333; 
+    line-height: 1.8; 
+    white-space: pre-line; 
+}
+
+.error-page {
+    background: #000; 
+    color: #ff4444; 
+    height: 100vh;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    text-align: center; 
+    line-height: 2;
+    font-family: monospace;
+}
+.flicker { animation: flicker 2s infinite; }
+@keyframes flicker { 0%{opacity:1;}50%{opacity:0.85;}100%{opacity:1;} }
+
+.randCode { 
+    color: #ff4444; 
+    font-size: 12px; 
+    user-select: none; 
+    opacity: 0.7;
+    letter-spacing: 1px;
+}
+
+#guSinglePage { 
+    text-align: center; 
+    padding: 40px 20px; 
+    background: #f9f9f9;
+}
+#guSinglePage img {
+    max-width: 350px; 
+    border-radius: 10px; 
+    margin: 20px 0;
+    border: 2px solid #c0392b; 
+    box-shadow: 0 0 20px rgba(192,57,43,0.3);
+}
+#guSinglePage button {
+    padding:8px 16px; 
+    background:#c0392b; 
+    color:#fff; 
+    border:none; 
+    border-radius:4px; 
+    cursor:pointer;
+}
+
+#videoPage {
+    background: #000;
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+#videoPage h3 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+#videoPage video {
+    max-width: 90%;
+    max-height: 80vh;
+    border: 2px solid #fff;
+    border-radius: 8px;
+}
+#videoPage button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #c0392b;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.fade-text {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 0 0 12px rgba(255,0,0,0.6);
+    opacity: 0;
+    animation: fadeSlow 60s linear forwards;
+    pointer-events: none;
+    z-index: 10;
+    writing-mode: vertical-rl;
+    letter-spacing: 10px;
+}
+@keyframes fadeSlow {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.time-flicker-text {
+    position: absolute;
+    left: 30px;
+    bottom: 30px;
+    font-size: 18px;
+    color: #ff4444;
+    text-shadow: 0 0 8px red;
+    font-family: monospace;
+    z-index: 10;
+    pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<div class="search-bar">
+    <input type="text" id="searchInput">
+    <button onclick="doSearch()">搜索</button>
+    <button onclick="showStudentLogin()">学生登录</button>
+    <button onclick="showTeacherLogin()">教师登录</button>
+</div>
+
+<div id="main2015" class="container">
+    <header>
+        <h1>九华市综合中学</h1>
+        <p>志于道，据于德，依于仁，亲师乐群，明心克己，而后成人</p>
+    </header>
+    <div class="card">
+        <h2>学校概况 · 历史沿革</h2>
+        <div class="text text-indent">九华市综合中学文脉悠远，其办学踪迹早在地方县志中便有记载，溯源可至古时岭前书院。</div>
+        <div class="text text-indent">岭前书院育人有道，立下“其弟子甚睦，皆以师兄弟相称”的规矩，同窗和睦、尊师重道的学风，自此传承百年，成为学校不变的精神根基。</div>
+        <div class="text text-indent">历经岁月更迭，书院文脉绵延至今，发展为如今的九华市综合中学。学校占地面积广袤，校园规划独具匠心，整体划分为初中、高中四大校区，是兼具古韵与现代气息的育人沃土。</div>
+        <div class="text text-indent">从古书院到新学府，学校始终承续优良传统，深耕教育，培育英才，书写着九华地方教育的发展篇章。</div>
+    </div>
+    <div class="card" id="teacher">
+        <h2>师资队伍 · 名师风采</h2>
+        <div class="teacher-box">
+            <div class="teacher-name">顾怡静｜初中部语文教师</div>
+            <div class="teacher-title">现任初中部语文教师，承担七、八年级语文教学工作</div>
+            <div class="teacher-desc">长期从事基础教育教学实践，在学生阅读习惯培养与学习方法指导方面积累了一定经验。注重因材施教，关注学生个体差异，课堂风格耐心细致，重视与学生的沟通与反馈，致力于提升学生学习兴趣与综合素养。</div>
+            <div class="teacher-motto">教育格言：少年易学老难成，一寸光阴不可轻。</div>
+            <div class="teacher-desc">曾参与校内“学生学习适应性提升计划”相关工作。</div>
+        </div>
+        <div class="teacher-box">
+            <div class="teacher-name">马静娴｜初中部数学教师</div>
+            <div class="teacher-title">现任初中部数学教师，承担八年级数学教学工作</div>
+            <div class="teacher-desc">从教十余年，在初中数学分层教学与作业规范管理方面积累了一定经验。课堂教学条理清晰，注重解题过程的规范性与完整性，对学生的作业完成度和订正质量要求较高。工作认真负责，所带班级数学成绩稳定。</div>
+            <div class="teacher-motto">教育格言：严谨治学，踏实育人。</div>
+        </div>
+        <div class="teacher-box">
+            <div class="teacher-name">许宁｜初中部英语教师</div>
+            <div class="teacher-title">现任初中部英语教师，承担七年级英语教学工作</div>
+            <div class="teacher-desc">长期从事基础英语兴趣培养实践，在情境教学与课堂活动设计方面积累了一定经验。课堂氛围轻松活泼，注重学生的口语表达与课堂参与度，善于通过小组活动激发学习动机。</div>
+            <div class="teacher-desc">曾参与校内“课后服务时间段优化”相关工作。</div>
+            <div class="teacher-motto">教育格言：To learn, to experience, to grow.</div>
+            <div class="note">注：许老师本学期起不再承担九年级教学工作，如有相关课业问题请与教务处联系。</div>
+        </div>
+    </div>
+    <div class="card">
+        <h2>校园风采</h2>
+        <div class="text" style="font-weight:bold; color:#c0392b;">【2015年度校级优秀教师表彰名单】</div>
+        <div class="text">为表彰在教育教学工作中表现突出的教师，学校于2015年9月10日在报告厅举行校级优秀教师表彰活动。现将获奖教师名单公布如下：</div>
+        <ul class="honor-list">
+            <li>顾怡静（语文组）</li>
+            <li>马静娴（数学组）</li>
+            <li>张建明（英语组）</li>
+        </ul>
+        <div class="text">以上教师在教学工作中表现突出，教学成绩稳定，受到学生及同事一致认可。本次表彰活动因故未能留存现场影像资料，相关情况以文字记录为准。</div>
+        <div class="text" style="font-weight:bold; color:#c0392b; margin-top:20px;">【2020年度校级优秀教师表彰】</div>
+        <div class="text">本年度教学工作已完成阶段性评估。现将表现较为突出的教师记录如下：</div>
+        <ul class="honor-list">
+            <li>顾怡静（语文组）</li>
+            <li>马静娴（数学组）</li>
+            <li>许宁（英语组）</li>
+        </ul>
+        <div class="text">表彰相关内容已纳入教学记录系统。由于本年度教学安排调整，未组织集中表彰活动。相关记录将由各年级教学单元自行归档。</div>
+        <div class="article">
+            <div class="title">学生作品 · 征文选登：我的语文老师</div>
+            <div class="info">作者：初三（23）班 李思琪 | 投稿日期：2015.09.09</div>
+            <div class="content">
+                <p>老师，是我们成长的引路人，是大海旁明亮的灯塔，是辛勤劳动却不求回报的园丁。一位好老师，对于我们的启发和教育是无限的。</p>
+                <p>我的语文老师，个子不高，一头青丝里偶有几根白发，一双眼睛里蕴含着温柔与宽容，同时又不失严谨与严厉。上课时，她喜欢侧身站在讲台上，一只手攥着教杆，一只手拿着粉笔。讲到重要的地方，老师便会黑板上写下那潇洒又不失工整的板书。随后走下讲台，从我们的眼神中，她就能一眼看出谁还不明白。于是，我便疑心老师会“读心术”，不然，她怎么会如此迅速地为答疑解惑呢。</p>
+                <p>老师常说，在时间的大钟上，只有两个字——现在。我们要珍惜时间。</p>
+            </div>
+        </div>
+        <ul class="graduate-list">
+            <li>陈思远（九年级1班）</li>
+            <li>林嘉怡（九年级2班）</li>
+            <li>周子航（九年级3班）</li>
+            <li>严子承（九年级9班）</li>
+        </ul>
+    </div>
+    <div class="card">
+        <h2>校园公告栏</h2>
+        <div class="notice-item">
+            <div class="notice-title">关于进一步加强校园管理的补充规定</div>
+            <div class="notice-info">2015.09.15 政教处</div>
+            <div class="notice-content">
+                <p>1. 晚间自习20:30结束，21:15前须离开教学楼。</p>
+                <p>2. 综合楼五楼非工作人员禁止进入。</p>
+                <p>3. 21:00后请勿与教师单独相处。</p>
+                <p>4. 拾获计时物品请勿触碰，立即上报。</p>
+            </div>
+        </div>
+        <div class="notice-item">
+            <div class="notice-title">关于明德轩池塘暂停开放的通知</div>
+            <div class="notice-info">2020.10.15 总务处</div>
+            <div class="notice-content">
+                <p>池塘排淤净化，暂停开放。出现异常鱼群属正常扰动，请勿惊慌。</p>
+                <p>请勿靠近、翻越、打捞，联系总务处处理。</p>
+            </div>
+        </div>
+    </div>
+    <footer>九华市综合中学 © 2026 版权所有</footer>
+</div>
+
+<div id="main2020" class="container">
+    <header>
+        <h1>九华市综合中学 <span class="randCode">㒴㒰㒯㒲∆䂿䃿䄃䄪|2020䥢䥣䥦䥧#373䨻䯁䯄</span></h1>
+        <p>
+            <span class="randCode">䀁䀂䀃䀄䀅䀆䀇䀈䀉䀊䀋䀌䀍䀎䀏</span>
+            志于道，据于德，依于仁，亲师乐群，明心克己，而后成人
+            <span class="randCode">䀏䀎䀍䀌䀋䀊䀉䀈䀇䀆䀅䀄䀃䀂䀁</span>
+        </p>
+    </header>
+    <div class="card">
+        <h2>校园风采 <span class="randCode">䄣䄤䄥䄦䄧䄨䄩䄪</span></h2>
+        <div class="text" style="font-weight:bold; color:#c0392b;">【2020年度校级优秀教师表彰】</div>
+        <div class="text">本年度教学工作已完成阶段性评估。现将表现较为突出的教师记录如下：</div>
+        <ul class="honor-list">
+            <li>顾怡静 <span class="randCode">䁲䁳䁴</span>（语文组）</li>
+            <li>马静娴 <span class="randCode">䁵䁶䁷</span>（数学组）</li>
+            <li>许宁 <span class="randCode">䁸䁹䁺</span>（英语组）</li>
+        </ul>
+        <div class="text">表彰相关内容已纳入教学记录系统。由于本年度教学安排调整，未组织集中表彰活动。相关记录将由各年级教学单元自行归档。</div>
+    </div>
+
+    <div class="card">
+        <h2>毕业生风采 <span class="randCode">䈖䈗䈘䈙䈚䈛</span></h2>
+        <div class="text text-indent">2020届高中毕业生毕业典礼现场，全体师生齐唱《送别》，致敬青春，致敬岁月。</div>
+        <div class="text" style="text-align:center; margin-top:15px;">
+            <button onclick="showVideo()" style="padding:10px 24px; background:#c0392b; color:#fff; border:none; border-radius:6px; cursor:pointer; font-size:16px;">
+                观看现场视频：送别
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>校园公告 <span class="randCode">䄣䄤䄥䄦䄧䄨䄩䄪</span></h2>
+        <div class="notice-item">
+            <div class="notice-title">关于明德轩池塘暂停开放的通知</div>
+            <div class="notice-info">2020.10.15 总务处 <span class="randCode">䥢䥣䥦䥧</span></div>
+            <div class="notice-content">
+                <p>池塘排淤净化，暂停开放。出现异常鱼群属正常扰动，请勿惊慌。</p>
+                <p>请勿靠近、翻越、打捞，联系总务处处理。</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <span class="randCode">ERROR䨻䯁䯄#373䥢䥣䥦䥧</span>
+        九华市综合中学 © 2026
+        <span class="randCode">TIME_ERROR䄣䄤䄥䄦䄧䄨䄩䄪</span>
+    </footer>
+</div>
+
+<div id="guSinglePage" class="container">
+    <h2>顾怡静｜初中部语文教师</h2>
+    <!-- GitHub 线上图片路径 -->
+    <img src="shoubiao.jpg" alt="手表">
+    <div class="teacher-desc" style="max-width:600px; margin:20px auto;">
+        长期从事基础教育教学实践，在学生阅读习惯培养与学习方法指导方面积累了一定经验。注重因材施教，关注学生个体差异，课堂风格耐心细致，重视与学生的沟通与反馈，致力于提升学生学习兴趣与综合素养。
+    </div>
+    <div class="teacher-motto">教育格言：少年易学老难成，一寸光阴不可轻。</div>
+    <br>
+    <button onclick="backMain()">返回</button>
+</div>
+
+<div id="studentLogin" class="login-page">
+    <div class="login-box">
+        <h3>学生登录</h3>
+        <select id="stuYear">
+            <option value="">选择入学年份</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020" id="opt2020" disabled>2020(已解锁)</option>
+        </select>
+        <input type="text" id="stuId" readonly>
+        <input type="password" id="stuPwd" readonly>
+        <button onclick="studentLogin()">登录</button>
+        <button onclick="backMain()">返回首页</button>
+    </div>
+</div>
+
+<div id="teacherLogin" class="login-page">
+    <div class="login-box">
+        <h3>教师登录</h3>
+        <select id="teaYear">
+            <option value="">选择入职年份</option>
+            <option value="2015">2015</option>
+            <option value="2020">2020</option>
+        </select>
+        <input type="text" id="teaName" readonly value="顾怡静">
+        <input type="password" id="teaPwd" readonly value="jhteacher">
+        <button onclick="teacherLogin()">登录</button>
+        <button onclick="backMain()">返回首页</button>
+    </div>
+</div>
+
+<div id="emailSystem" class="email-system">
+    <div class="email-header">
+        <h2>教师内部邮件系统 <span class="randCode">䀁䀂䀃䀄䀅䀆</span></h2>
+        <button onclick="backMain()">返回首页</button>
+    </div>
+    <div class="email-item">
+        <div class="email-from">发件人：九华市初级中学·教务处 <span class="randCode">䄣䄤䄥</span></div>
+        <div class="email-title">聘书留档｜岗位安排通知 <span class="randCode">䄦䄧䄨</span></div>
+        <div class="email-content">
+            <span class="randCode">䀎䀏䀐䀑䀒䀓䀔䀕䀖䀗</span>
+收件人：顾怡静
+任教学科：语文 ｜ 任教班级：八年级23、24班
+性质：正式编制
+报到：教师公寓外侧报到点登记
+说明：报到前请勿直接接触学生。
+            <span class="randCode">䀗䀖䀕䀔䀓䀒䀑䀐䀏䀎</span>
+        </div>
+    </div>
+    <div class="email-item">
+        <div class="email-from">校医院 <span class="randCode">䀚䀛䀜</span></div>
+        <div class="email-title">精神科复核建议 <span class="randCode">䀝䀞䀟</span></div>
+        <div class="email-content">
+            <span class="randCode">䀠䀡䀢䀣䀤䀥</span>
+时间感知偏差、校历同步误差、离岗异常、学生时间流速反馈。
+            <span class="randCode">䀥䀤䀣䀢䀡䀠</span>
+        </div>
+    </div>
+    <div class="email-item">
+        <div class="email-from">姜老师 <span class="randCode">䀐䀑䀒</span></div>
+        <div class="email-title">寻猫启事 <span class="randCode">䀓䀔䀕</span></div>
+        <div class="email-content">
+            <span class="randCode">䀖䀗䀘䀙</span>
+我的猫昨日傍晚走失，见到请联系，感谢。
+            <span class="randCode">䀙䀘䀗䀖</span>
+        </div>
+    </div>
+    <div class="email-item">
+        <div class="email-from">校医院·安全规范科 <span class="randCode">䂿䃿䄃䄪</span></div>
+        <div class="email-title">教师公寓安全与时间认知告知书 <span class="randCode">䥢䥣䥦䥧</span></div>
+        <div class="email-content">
+            <span class="randCode">㒴㒰㒯㒲㒳㒴㒵㒶㒷</span>
+6、您在教师公寓内一般不会表现出时间紊乱综合征。如果您感到自己对时间的认知出现了问题，请将黑色腕表丢出房门，并立刻进入睡眠，睡醒后前往校医院进行复查。
+7、请牢记，教师公寓内只有教师。教师是身体完整的成年人类。
+            <span class="randCode">㒷㒶㒵㒴㒳㒲㒯㒰㒴</span>
+        </div>
+    </div>
+</div>
+
+<div id="error373" class="error-page">
+    <div class="flicker">
+        <h2>ERROR #373</h2>
+        <p>访问被拒绝</p>
+        <p>当前请求不在授权范围内。</p>
+        <p>该记录已被封存。</p><br>
+        <p>搜索时间：<span id="searchTime">----</span></p><br>
+        <p id="tipText">请校准时间后再次尝试。</p><br>
+        <button onclick="backMain()">返回首页</button>
+    </div>
+</div>
+
+<div id="videoPage">
+    <h3>2020届毕业生 ·《送别》</h3>
+    <!-- GitHub 线上视频路径 -->
+    <video width="800" controls autoplay playsinline>
+        <source src="songbie.mp4" type="video/mp4">
+        您的浏览器不支持视频播放
+    </video>
+    <div class="fade-text">不至于前，不止于此</div>
+    <div class="time-flicker-text" id="timeText">02:00</div>
+    <button onclick="backMain()">返回校园</button>
+</div>
+
+<script>
+let searchedGu = false;
+let lastSearchTime = "";
+let videoTimer;
+
+function startTimeGlitch(){
+    let sec = 120;
+    let mode = "down";
+    videoTimer = setInterval(()=>{
+        if(Math.random() < 0.3) mode = mode === "down" ? "up" : "down";
+        if(mode === "down") sec--;
+        else sec++;
+        if(sec < 0) sec = 0;
+        let m = Math.floor(sec / 60).toString().padStart(2,'0');
+        let s = (sec % 60).toString().padStart(2,'0');
+        document.getElementById("timeText").innerText = `${m}:${s}`;
+    }, 1000);
+}
+
+function stopTimeGlitch(){
+    clearInterval(videoTimer);
+}
+
+function getNowTime() {
+    let d = new Date();
+    let Y = d.getFullYear();
+    let M = (d.getMonth()+1).toString().padStart(2,'0');
+    let D = d.getDate().toString().padStart(2,'0');
+    let H = d.getHours().toString().padStart(2,'0');
+    let m = d.getMinutes().toString().padStart(2,'0');
+    let s = d.getSeconds().toString().padStart(2,'0');
+    return `${Y}-${M}-${D} ${H}:${m}:${s}`;
+}
+
+function timeAlert(){
+    if(document.getElementById("main2020").style.display === "block"){
+        if(Math.random() < 0.15) alert("请校准时间");
+    }
+}
+setInterval(timeAlert, 3000);
+
+function doSearch(){
+    lastSearchTime = getNowTime();
+    const v = document.getElementById("searchInput").value.trim();
+    if(v === "顾怡静"){
+        searchedGu = true;
+        document.getElementById("opt2020").disabled = false;
+        document.getElementById("opt2020").innerText = "2020(已解锁)";
+        if(document.getElementById("main2020").style.display === "block"){
+            showGuPage();
+        } else {
+            document.getElementById("teacher").scrollIntoView({behavior:"smooth"});
+        }
+    } else if(v === "373"){
+        document.getElementById("searchTime").innerText = lastSearchTime;
+        if(document.getElementById("main2020").style.display === "block"){
+            showGuPage();
+        } else {
+            showError();
+        }
+    } else {
+        alert("未找到相关内容");
+    }
+}
+
+function showVideo() {
+    show("videoPage");
+    startTimeGlitch();
+}
+
+function showStudentLogin(){ show("studentLogin"); }
+function showTeacherLogin(){ show("teacherLogin"); }
+function showEmail(){ show("emailSystem"); }
+function showError(){ show("error373"); }
+function showGuPage(){ show("guSinglePage"); }
+
+function backMain(){
+    stopTimeGlitch();
+    show("main2015");
+}
+
+function show(id){
+    document.querySelectorAll("#main2015,#main2020,#studentLogin,#teacherLogin,#emailSystem,#error373,#guSinglePage,#videoPage").forEach(e=>e.style.display="none");
+    if(id === "main2020"){
+        document.getElementById("main2020").style.display = "block";
+        document.title = "九华市综合中学 - 2020版";
+    } else if(id === "main2015"){
+        document.getElementById("main2015").style.display = "block";
+        document.title = "九华市综合中学 - 2015版";
+    } else if(id === "guSinglePage"){
+        document.getElementById("guSinglePage").style.display = "block";
+    } else if(id === "studentLogin" || id === "teacherLogin"){
+        document.getElementById(id).style.display = "flex";
+    } else if(id === "error373"){
+        document.getElementById("searchTime").innerText = lastSearchTime;
+        document.getElementById(id).style.display = "flex";
+    } else if(id === "videoPage"){
+        document.getElementById(id).style.display = "flex";
+    } else {
+        document.getElementById(id).style.display = "block";
+    }
+}
+
+document.getElementById("stuYear").onchange = function(){
+    const y = this.value;
+    if(y === "2015"){
+        document.getElementById("stuId").value = "20150910";
+        document.getElementById("stuPwd").value = "jhzx2015";
+    } else {
+        document.getElementById("stuId").value = "无权限账号";
+        document.getElementById("stuPwd").value = "xxxxxxxx";
+    }
+}
+
+function studentLogin(){
+    const y = document.getElementById("stuYear").value;
+    if(!y) return alert("请选择年份");
+    if(y === "2015"){
+        show("main2015");
+    } else if(y === "2020"){
+        if(!searchedGu){
+            alert("权限不足，请先在2015版搜索顾怡静解锁");
+            return;
+        }
+        show("main2020");
+    } else {
+        showError();
+    }
+}
+
+function teacherLogin(){
+    const y = document.getElementById("teaYear").value;
+    if(!y) return alert("请选择入职年份");
+    if(y === "2015" || y === "2020"){
+        showEmail();
+    } else {
+        showError();
+    }
+}
+
+setInterval(()=>{
+    const el = document.getElementById("tipText");
+    if(el && Math.random() < 0.2){
+        el.innerText = "请校准时间后不要再次尝试。";
+        setTimeout(()=>el.innerText="请校准时间后再次尝试",200);
+    }
+}, 2000);
+</script>
+</body>
+</html>
